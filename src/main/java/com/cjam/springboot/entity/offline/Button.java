@@ -1,0 +1,16 @@
+package com.cjam.springboot.entity.offline;
+
+/**
+ * Created by jam on 2017/1/2.
+ */
+public class Button {
+    private String name;//所有一级菜单、二级菜单都共有一个相同的属性，那就是name
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}

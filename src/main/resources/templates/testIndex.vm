@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css">
+
+    <style type="text/css">
+        .placeholder > a {
+            text-align: center;
+            color:gray;
+        }
+    </style>
+</head>
+
+<body ontouchstart>
+
+<div class="weui-flex">
+    <div class="weui-flex__item">
+        <div class="placeholder">
+            <a href="/wap/schoolCourseList?orgId=11157">
+                <img src="http://img.ablesky.cn/stata/images/mobile/homeModuleIcon/allcourse_7659cac3.png">
+                <span style="text-align: center">课程中心</span>
+            </a>
+        </div>
+    </div>
+    <div class="weui-flex__item"><div class="placeholder"><div class="icon-box">
+        <i class="weui-icon-success weui-icon_msg"></i>
+        <div class="icon-box__ctn">
+            <h3 class="icon-box__title">成功</h3>
+        </div>
+    </div></div></div>
+    <div class="weui-flex__item"><div class="placeholder"><div class="icon-box">
+        <i class="weui-icon-success weui-icon_msg"></i>
+        <div class="icon-box__ctn">
+            <h3 class="icon-box__title">成功</h3>
+        </div>
+    </div></div></div>
+    <div class="weui-flex__item"><div class="placeholder"><div class="icon-box">
+        <i class="weui-icon-success weui-icon_msg"></i>
+        <div class="icon-box__ctn">
+            <h3 class="icon-box__title">成功</h3>
+        </div>
+    </div></div></div>
+</div>
+</body>
+</html>
