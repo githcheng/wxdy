@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.cjam.springboot.appEntity.BizException;
-import com.cjam.springboot.appEntity.CourseLog;
-import com.cjam.springboot.appEntity.Student;
-import com.cjam.springboot.appEntity.User;
+import com.cjam.springboot.appEntity.*;
 import com.cjam.springboot.service.CourseLogService;
+import com.cjam.springboot.service.CourseService;
 import com.cjam.springboot.service.UserService;
 import com.cjam.springboot.util.TimeUtil;
 
@@ -40,6 +38,9 @@ public class CourseController {
 
     @Autowired
     private CourseLogService courseLogService;
+
+    @Autowired
+    private CourseService courseService;
 
     @RequestMapping(value="/getCourseList",method={RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
@@ -126,6 +127,59 @@ public class CourseController {
             CourseLog courseLog = new CourseLog(courseId, studentId, teacherId, courseName, studentName, teacherName, date, beginTime, endTime, descmsg);
             courseLogService.insert(courseLog);
             res.put("msg","ok");
+        } catch (BizException e) {
+            logger.error(e.getMessage(),e);
+            res.put("code",1);
+            res.put("msg", e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e);
+            res.put("code",1);
+            res.put("msg", "服务异常");
+        } finally {
+            return res;
+        }
+    }
+
+
+
+    @RequestMapping(value="/getPickerList",method={RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody
+    JSONObject getPickerList(HttpServletRequest request,
+                               HttpServletResponse response) {
+
+        String openid = request.getParameter("openid");
+
+        JSONObject res = new JSONObject();
+        res.put("code",0);
+
+        try {
+
+            List<User> allUser = userService.getAllUser();
+            JSONArray studentList = new JSONArray();
+            JSONArray teacherList = new JSONArray();
+            for (User user : allUser){
+                JSONObject obj = new JSONObject();
+                obj.put("id",user.getId());
+                obj.put("nickname",user.getNickName());
+                if (user.getType() == User.STUDENT_TYPE){
+                    studentList.add(obj);
+                } else {
+                    teacherList.add(obj);
+                }
+            }
+
+            List<Course> allCourse = courseService.getAllCourse();
+            JSONArray courseList = new JSONArray();
+            for (Course course : allCourse){
+                JSONObject obj = new JSONObject();
+                obj.put("id",course.getId());
+                obj.put("nickname",course.getName());
+                courseList.add(obj);
+            }
+
+            res.put("studentList",studentList);
+            res.put("teacherList",teacherList);
+            res.put("courseList",JSON.toJSON(courseList));
         } catch (BizException e) {
             logger.error(e.getMessage(),e);
             res.put("code",1);
