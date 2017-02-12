@@ -31,7 +31,7 @@ public class CourseLog {
 
     public CourseLog(String courseId, String studentId, String teacherId,
                      String courseName, String studentName, String teacherName,
-                     String date, String beginTime, String endTime, String descmsg) {
+                     String date, String beginTime, String endTime, String descmsg) throws BizException {
 
         this.courseId = Integer.valueOf(courseId);
         this.studentId = Long.valueOf(studentId);

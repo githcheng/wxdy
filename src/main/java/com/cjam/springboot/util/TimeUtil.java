@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.cjam.springboot.appEntity.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,14 +37,14 @@ public class TimeUtil {
         return sdf.format(new Date(timems));
     }
 
-    public static long getLongTypeTime(String date, String time){
+    public static long getLongTypeTime(String date, String time) throws BizException {
         try {
             Date dateObj = sdf.parse(date + " " + time);
             return dateObj.getTime();
         } catch (ParseException e) {
             logger.error(e.getMessage(),e);
+            throw new BizException("请选择正确的日期与时间");
         }
-        return 0;
     }
 
 

@@ -122,7 +122,6 @@ public class CourseController {
             // 检查输入
             submitCourseLogCheck(request);
 
-
             User operator = userService.findByOpenId(openid);
             CourseLog courseLog = new CourseLog(courseId, studentId, teacherId, courseName, studentName, teacherName, date, beginTime, endTime, descmsg);
             courseLogService.insert(courseLog);
